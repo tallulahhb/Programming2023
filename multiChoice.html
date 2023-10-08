@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quizDemo</title>
+    <style> 
+        body{text-align: center;}
+    </style>
+</head>
+<body>
+    <h1 id="questionSpace"> </h1>
+    <h3 id="choiceSpace"> </h3>
+    <input id="userInput"> 
+    <button onclick="submit()"> Submit </button>
+    <h2 id="message"> </h2>
+
+
+    <script> 
+        //Variables to store specific elements from the HTML, defines the section of code so we can identify it later.
+        var questionSpace = document.getElementById("questionSpace");
+        var userInput = document.getElementById("userInput");
+        var message = document.getElementById("message")
+        var choiceSpace = document.getElementById("choiceSpace")
+
+    // A array that holds all of the quiz questions 
+        var quizQuestions = [
+            { question: "What is 2+2?",
+              choices: [" 2"," 4"," 6"],
+              answer: "4"
+            } ,
+            { question: "How tall is a Giraffe",
+              choices: [" 1 metre"," 3 metres", " 5.5 metres" ],
+              answer: "5.5 metres" 
+            },
+            { question: "What colour is the Sun?",
+              choices: [" green"," darkslategrey"," yellow"],
+              answer: "yellow"
+            }
+                            ];
+        var questionState = 0;
+        var score = 0;
+
+        questionSpace.innerHTML = quizQuestions[questionState]['question'];
+        choiceSpace.innerHTML = quizQuestions[questionState]['choices'];
+
+        
+        //Function that holds all the submit code, so we dont have to repeat code we can just call this function.
+        function update() { 
+             if(questionState == 2) {
+                    message.innerHTML = "Your score is " + score
+                 }
+                questionState++;
+                questionSpace.innerHTML = quizQuestions[questionState]['question'];
+                choiceSpace.innerHTML = quizQuestions[questionState]['choices'];
+                userInput.value = ""; //Clearing the previous answer
+        }
+
+           //Submit code, when the user presses on the button 'submit' and their answer = the answer from the questionstate the code plays and it changes the question 
+           function submit() {
+            if(userInput.value == quizQuestions[questionState]['answer'] ) {
+                score++;
+                update()
+            } else { 
+                update()
+            }
+            
+        }
+
+
+    </script>
+</body>
+</html>

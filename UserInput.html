@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Quiz</title>
+</head>
+<body>
+    <h1> What is the largest continent in the world? </h1>
+    <input id="userInputContinent">
+    <button onclick="submit()"> Submit </button> 
+    
+    <script> 
+        var userInputContinent = document.getElementById("userInputContinent");
+        
+        function submit() {
+            if(userInputContinent.value == "asia") {
+                alert("correct!");
+            } else {
+                alert("wrong");
+            }
+        }
+    </script>
+
+
+<h1> What is the largest ocean in the world? </h1>
+<input id="userInputOcean">
+<button onclick="submit2()"> Submit </button> 
+
+<script> 
+    var userInputOcean = document.getElementById("userInputOcean");
+    
+    function submit2() {
+        if(userInputOcean.value == "pacific ocean") {
+            alert("correct!");
+        } else {
+            alert("wrong");
+        }
+    }
+</script>
+
+
+<h1> What is the most smallest country in the world? </h1>
+<input id="userInputSmallCountry">
+<button onclick="submit3()"> Submit </button> 
+
+<script> 
+    var userInputSmallCountry = document.getElementById("userInputSmallCountry");
+    
+    function submit3() {
+        if(userInputSmallCountry.value == "vatican city") {
+            alert("correct!");
+        } else {
+            alert("wrong");
+        }
+    }
+</script>
+</body>
+</html>
