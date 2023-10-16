@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THB QUIZ </title>
+    <title>THB Geography Quiz! </title>
     <style> 
         body{text-align: center;}
-        body {text-align: center; background-image: url(QuizBackground2.png); padding: 5cm;}
+        body {text-align: center; background-image: url(QuizBackground3.png); padding: 5cm;}
     h1 { border: 8px solid black; background-color: white; padding: 6px; font-family:Georgia, 'Times New Roman', Times, serif} 
     h2 { border: 4px solid black; background-color: white; padding: 6px; font-family:Georgia, 'Times New Roman', Times, serif} 
     input { border: 2px solid red; background-color: white; padding: 6px; font-family:Georgia, 'Times New Roman', Times, serif; width: 500px; height: 20px;}
     button { border: 2px solid green; background-color: white; padding: 5px; font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;}
     button:hover { background-color: lightgreen;}
+    
     
     </style>
 </head>
@@ -22,72 +23,107 @@
     <input id="userInput"> <br> <br>
     <button onclick="submit()"> S u b m i t </button>
     <h3 id="message"> </h3>
+    <h3 id="score"> </h3>
     <script> 
-        //Variables to store specific elements from the HTML, defines the section of code so we can identify it later.
+        //Variables to store specific elements from the HTML, defines the section of code so we can identify it later. 
+        // So if later in the code or just thorughout the code in general these variables help to identitfy them and holf information relevent to them.
         var questionSpace = document.getElementById("questionSpace");
         var userInput = document.getElementById("userInput");
         var message = document.getElementById("message")
         var choiceSpace = document.getElementById("choiceSpace")
         var InfoDiv = document.getElementById("InfoDiv")
+        var quizOver = document.getElementById("quizOver")
+        var score = document.getElementById("score")
 
     // A array that holds all of the quiz questions, the different choices, the answers, and the information about the answers.
-    // Each question has 3 options, and a information space, where after the question the user gets facts about the correct answer. 
-    // 10 questions so far... (So i can keep count of them)
+    // Each question has 3 sections, and a information space, where after the question the user gets facts about the correct answer. MORE KNOWLEDGE!
+    // 15 questions so far... (So i can keep count of them)
         var quizQuestions = [
-            { question: "What is the Largest Country in the World?",
+            { question: "1. What is the Largest Country in the World?",
               choices: [" Russia", " USA", " Canada", " Brazil"],
               answer: "Russia",
               info: "Russia is the largest country in the world spanning over 17.1 million km²! Which is roughly double the size of the second largest country Canada!"
             } ,
-            { question: "What is the Largest Ocean in the World?",
-              choices: [" Atlantic Ocean", " Pacific Ocean", " Indian Ocean"],
-              answer: "Pacific Ocean",
+            { question: "2. What is the Largest Ocean in the World?",
+              choices: [" Atlantic", " Pacific", " Indian"],
+              answer: "Pacific",
               info: " The Pacific Ocean is the largest ocean in the world spanning over 165.2 million km²! The average depth is 4,280 m!",
-
              }, 
-            { question: "What country are the Great Pyramids of Giza Located In?",
+            { question: "3. What country are the Great Pyramids of Giza Located In?",
               choices: [" Libya", " Egypt", " Columbia"],
               answer: "Egypt",
               info: " Egypt is home to the Great Pyramids of Giza! But did you know, Egypt doesn't actually have the most Pyramids in the world its actually Sudan!",
-
             },
-            { question: "What is the Tallest Mountain in the World?",
+            { question: "4. What is the Tallest Mountain in the World?",
               choices: [" K2"," Killamonjaro"," Mount Everest"],
               answer: "Mount Everest",
               info: " Mount Everest, the maxium elevation is 4,280 m! The first person(s) ever to ascend Mount Everest was Sir Edmund Hillary and Tenzing Norgay in May of 1953! ",
             },
-            { question: "What is the Most Populated Country in the World?",
+            { question: "5. What is the Most Populated Country in the World?",
               choices: [" China"," India"," USA"],
               answer: "China",
               info: " China is home to 1.412 billion people! (2021)",
             },
-            { question: "Which Country has the most Natural Lakes?",
+            { question: "6. Which Country has the most Natural Lakes?",
               choices: [" Russia"," Norway "," Canada"],
               answer: "Canada",
               info: " Canada has over 879,800 lakes! Thats a lot of lakes!",
             },
-            { question: "What is the Smallest Country in the World?",
+            { question: "7. What is the Smallest Country in the World?",
               choices: [" Monaco"," Liechensein"," Vatican City"],
               answer: "Vatican City",
               info: " The Vatican City located in the larger city of Rome, Italy is the smallest offical country in the world! spanning only 1.05 km! The Vactican holds the 'headquaters' of the Roman Catholic Church!",
             },
-            { question: "Which River flows through Brazil?",
+            { question: "8. Which River flows through Brazil?",
               choices: [" The Amazon River"," River Seine"," The Nile River"],
               answer: "The Amazon River",
               info: " The Amazon River, flowing through 5 countries in the Northern section of South America: Ecuador, Colombia, Venezuela, Bolivia and Brazil!",
             },
-            { question: "How long is the River Nile?",
-              choices: [" 4,450 km", " 9,930 km", " 6,650 km"],
-              answer: "6,650 km",
-              info: "  The Nile is 6,650 km long! Making it the longest in the world!",
+            { question: "9. How long is the River Nile?",
+              choices: [" 4450 km", " 9930 km", " 6650 km"],
+              answer: "6650 km",
+              info: "  The Nile is 6650 km long! Making it the longest in the world!",
             },
-            { question: "What city and country is the Eiffel Tower located in?",
+            { question: "10. What city and country is the Eiffel Tower located in?",
               choices: [" Rome Italy", " London UK", " Paris France"],
               answer: "Paris France",
               info: " The Eiffel Tower is located in the City of Love, Paris, France! It is 330 m tall and was first under contruction in 1887!",
             },
+            { question: "11. Which City are the Spanish Steps loacated in? ",
+              choices: [" Madrid Spain"," Lisbon Portugal", " Rome Italy"],
+              answer: "Rome Italy",
+              info: " Though they name may deceive you the steps are actually located in Rome! The steps were built in order to link the Bourbon Spanish Embassy, and the Trinità dei Monti church in Rome.",
+            },
+            { question: "12. How many countries make up the United Kingdom? ",
+              choices: [" Two"," Four"," Six"],
+              answer: "Four",
+              info: " The United Kingdom includes England, Scotland, Wales and Northern Ireland.",
+            },
+            { question: "13. Which present day city does the Famous Volcano Mt Vesuvius look over?",
+              choices: [" Siena"," Lecce"," Naples"],
+              answer: "Naples",
+              info: " The town Naples is the third largest city in Italy after Rome and Milan. The town dates back to the third century and is home to the famous hertiage site and volcano victims of Pompeii.",
+            },
+            { question: "14. In what Ocean is the Bermuda Triangle located in?",
+              choices: [" Atlantic"," Pacific", " Indian"],
+              answer: "Atlantic",
+              info: " Located in the Atlantic, the Bermuda Triangle where it is said a number of aircrafts and ships have disappeared under mysterious circumstances!",
+            },
+            { question: "15. In which state in the USA can you find the Grand Canyon?",
+              choices: [" Nevada"," Montana", " Arizona"],
+              answer: "Arizona",
+              info: " Located in Arizona the Grand Canyon has a maximum depth of 1,829 metres, and is approximately 5-6 million years old!",
+            },
+            { question: " Congratulations you have completed the Quiz!",
+              choices: [" Hopefully you've learnt something new today and had fun! Press 'Submit' to find out your score! "],
+              answer: " ",
+              info: " See you next time! " ,
+            },
+            
                             ];
         // questionState holds what question we are up to, and it controls what question is shown after the user is finished with the previous one.
+        // score, this variable counts the users score throughout the quiz, so at the end it displays how my questions thye got right.
+        // 3 bottom lines hold where the information is stored in the arrays, for example the choices for each question is under the 'choices' category' this allows the code to easily find these sections and display the relevant information when needed.
         var questionState = 0;
         var score = 0;
         questionSpace.innerHTML = quizQuestions[questionState]['question'];
@@ -95,29 +131,27 @@
         InfoDiv.innerHTML = quizQuestions[questionState]['info'];
 
          //Submit code, when the user presses on the button 'submit' and their answer = the answer from the questionstate the code is compared with the users answer, 
-         // if they are correct it says, if they are incorrect is says. This then moves on into the displaying of more information about the answer.
+         // if they are correct it plays, if they are incorrect it plays. This then moves on into the displaying of more information about the answer.
+         // this also hold when the score pops up at the end of the quiz.
          function submit() {
-            if(userInput.value == quizQuestions[questionState]['answer'] ) {
-                update()
-            }
-            else { 
-                update()
-            }
-      
+            update()
+            if(questionState == 15) {
+                    message.innerHTML = "Your score is " + score 
+                 }
         }
 
         //Function that holds all the submit code, so we dont have to repeat code we can just call the functions is involved in the 'SUBMIT'.
+        // holds both the alerts for correct and incorrect.
         function update() {
             if(userInput.value == quizQuestions[questionState]['answer'] ) {
-            
+              score++;
               alert("Correct!")
               callInfo()
-              
-            }
+            }  
             else {
                 alert("Incorrect!") 
                 callInfo()
-                
+             
             }
         }
 
@@ -126,8 +160,10 @@
             InfoDiv.innerHTML = quizQuestions[questionState]['info'];
             InfoDiv.style.display = "block"
             NextDiv.style.display ="block" 
-            // Line 113 and 114, code to make the InfoDiv and nextQuestion button to show up after the user has answered the question.
+            // code to make the InfoDiv and nextQuestion button to show up after the user has answered the question.
          }
+         // the function for the button to continue on to the next question.
+         // toggles the informationDiv and nextQuestion button being visiable, as they appear and dissapear throughout the quiz.
             function nextQuestion() {
                 questionState++;
                 questionSpace.innerHTML = quizQuestions[questionState]['question'];
@@ -147,15 +183,20 @@
                 } else {
                 x.style.display = "none";
                 }
+
+                if(questionState == 15) {
+                var x = document.getElementById("scoreDiv"); 
+                  if (x.style.display === "none") {
+                  x.style.display = "block";
+                  } }
               }
-              // Lines 125-137 Removes the NextDiv div and the InfoDiv from the screen, so the user can move on to the next question with a clean slate.
-            
           
-            
          </script>
 
     <div id="InfoDiv"; style="display: none; border: 4px solid black; background-color:white; 
     padding: 6px; font-family:Georgia, 'Times New Roman', Times, serif"> 
+     
+     
      <p>
       
      </p>
